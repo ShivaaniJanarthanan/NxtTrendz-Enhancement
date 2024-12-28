@@ -3,6 +3,7 @@ import CartListView from '../CartListView'
 
 import CartContext from '../../context/CartContext'
 import EmptyCartView from '../EmptyCartView'
+import CartSummary from '../CartSummary'
 
 import './index.css'
 
@@ -11,9 +12,7 @@ const Cart = () => (
     {value => {
       const {cartList, removeAllCartItems} = value
       const showEmptyView = cartList.length === 0
-      const onClickRemoveAllBtn = () => {
-        removeAllCartItems()
-      }
+
       return (
         <>
           <Header />
@@ -22,15 +21,18 @@ const Cart = () => (
               <EmptyCartView />
             ) : (
               <div className="cart-content-container">
-                <h1 className="cart-heading">My Cart</h1>
-                <button
-                  type="button"
-                  className="remove-all-btn"
-                  onClick={onClickRemoveAllBtn}
-                >
-                  Remove All
-                </button>
+                <div className="cart-header">
+                  <h1 className="cart-heading">My Cart</h1>
+                  <button
+                    type="button"
+                    className="remove-all-btn"
+                    onClick={removeAllCartItems}
+                  >
+                    Remove All
+                  </button>
+                </div>
                 <CartListView />
+                <CartSummary />
               </div>
             )}
           </div>
